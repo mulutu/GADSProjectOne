@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/mybutton"
+        android:icon="@android:drawable/checkbox_off_background"
+        android:title="Syubmit"
+        app:showAsAction="always" />
+
+
+</menu>
