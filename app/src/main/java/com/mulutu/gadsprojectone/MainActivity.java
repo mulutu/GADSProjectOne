@@ -1,5 +1,6 @@
 package com.mulutu.gadsprojectone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        preparePage();
+    }
+
+    public void preparePage(){
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
 
@@ -35,13 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-
-
-
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        viewPagerAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.mybutton) {
             // do something here
+            Intent intent = new Intent(MainActivity.this, ProjectSubmitActivity.class);
+            //intent.putExtra("farmId", farm.getFarmId());
+            startActivity(intent);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
