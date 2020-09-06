@@ -1,6 +1,7 @@
 package com.mulutu.gadsprojectone.util;
 
-import com.mulutu.gadsprojectone.model.Learner;
+import com.mulutu.gadsprojectone.model.LearnerHours;
+import com.mulutu.gadsprojectone.model.LearnerIQ;
 
 import java.util.List;
 
@@ -9,8 +10,8 @@ import retrofit2.http.GET;
 
 public interface GetDataService {
     @GET("/api/skilliq")
-    Call<List<Learner>> getTopSkillIQLearners();
+    Call<List<LearnerIQ>> getTopSkillIQLearners();
 
     @GET("/api/hours")
-    Call<List<Learner>> getTopHoursLearners();
+    Call<List<LearnerHours>> getTopHoursLearners();
 }

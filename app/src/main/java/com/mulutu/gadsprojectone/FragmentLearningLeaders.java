@@ -13,12 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mulutu.gadsprojectone.adaptar.CustomAdapter;
-import com.mulutu.gadsprojectone.model.Learner;
+import com.mulutu.gadsprojectone.adaptar.CustomAdapterHours;
+import com.mulutu.gadsprojectone.model.LearnerHours;
 import com.mulutu.gadsprojectone.util.GetDataService;
 import com.mulutu.gadsprojectone.util.RetrofitClientInstance;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,9 +32,9 @@ public class FragmentLearningLeaders extends Fragment {
 
     private ViewGroup root;
     private ProgressDialog progressDialog;
-    private CustomAdapter learnerAdapter;
+    private CustomAdapterHours learnerAdapter;
     private RecyclerView recyclerView;
-    private List<Learner> studentList = new ArrayList<>();
+    private List<LearnerHours> studentList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -54,19 +55,22 @@ public class FragmentLearningLeaders extends Fragment {
         progressDialog.show();
 
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<List<Learner>> call = service.getTopHoursLearners();
-        call.enqueue(new Callback<List<Learner>>() {
+        Call<List<LearnerHours>> call = service.getTopHoursLearners();
+        call.enqueue(new Callback<List<LearnerHours>>() {
             @Override
-            public void onResponse(Call<List<Learner>> call, Response<List<Learner>> response) {
+            public void onResponse(Call<List<LearnerHours>> call, Response<List<LearnerHours>> response) {
                 progressDialog.dismiss();
                 studentList = response.body();
-                //prepareRecycler();
-                Log.d(TAG, ">>>  studentList <<<" + studentList);
+                Collections.sort(studentList, Collections.reverseOrder());
+                for (LearnerHours learner : studentList) {
+                    learner.setCriteria(2); // learning leader
+                }
+                //Log.d(TAG, ">>>  studentList <<<" + studentList);
                 generateDataList();
             }
 
             @Override
-            public void onFailure(Call<List<Learner>> call, Throwable t) {
+            public void onFailure(Call<List<LearnerHours>> call, Throwable t) {
                 progressDialog.dismiss();
                 Toast.makeText(getContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
             }
@@ -75,7 +79,7 @@ public class FragmentLearningLeaders extends Fragment {
 
     private void generateDataList() {
         recyclerView = (RecyclerView) root.findViewById(R.id.recycler_view);
-        learnerAdapter = new CustomAdapter(this.getContext(), studentList);
+        learnerAdapter = new CustomAdapterHours(this.getContext(), studentList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(learnerAdapter);

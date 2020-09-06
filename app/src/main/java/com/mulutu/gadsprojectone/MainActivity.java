@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private Button _btnOpenSubmitPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        prepareView();
 
         preparePage();
     }
@@ -40,6 +46,23 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
+    }
+
+    private void prepareView() {
+        _btnOpenSubmitPage = (Button) findViewById(R.id.btnOpenSubmitPage);
+        _btnOpenSubmitPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSubmitPage();
+            }
+        });
+    }
+
+    private void openSubmitPage() {
+        Intent intent = new Intent(MainActivity.this, ProjectSubmitActivity.class);
+        //intent.putExtra("farmId", farm.getFarmId());
+        startActivity(intent);
     }
 
     @Override
@@ -49,12 +72,9 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.notifyDataSetChanged();
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        //return super.onCreateOptionsMenu(menu);
-
-        getMenuInflater().inflate(R.menu.mymenu, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -62,15 +82,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.mybutton) {
-            // do something here
-            Intent intent = new Intent(MainActivity.this, ProjectSubmitActivity.class);
-            //intent.putExtra("farmId", farm.getFarmId());
-            startActivity(intent);
-            finish();
-        }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 }

@@ -2,6 +2,8 @@ package com.mulutu.gadsprojectone;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,13 +34,12 @@ public class ProjectSubmitActivity extends AppCompatActivity {
     }
 
     private void prepareToolbar() {
-        // Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // add back arrow to toolbar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
     }
 
@@ -57,10 +58,26 @@ public class ProjectSubmitActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*@Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(ProjectSubmitActivity.this, MainActivity.class );
+        Intent intent = new Intent(ProjectSubmitActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
-    }
+    }*/
 }

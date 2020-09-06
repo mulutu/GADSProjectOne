@@ -4,31 +4,44 @@
     android:id="@+id/card_view_friend"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardUseCompatPadding="true"
-    >
+    card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:padding="10dp">
 
         <ImageView
-            android:id="@+id/coverImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/badgeID"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="10dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/learnerName"
             style="@style/TextAppearance.AppCompat.Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/coverImage"
             android:layout_marginLeft="16dp"
-            android:paddingTop="20dp"
-            android:lines="2"
+            android:layout_toRightOf="@+id/badgeID"
+            android:lines="1"
+            android:paddingTop="10dp"
+            android:text="title" />
+
+        <TextView
+            android:id="@+id/learnerDetails"
+            style="@style/TextAppearance.AppCompat.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/badgeID"
+            android:layout_below="@+id/learnerName"
+            android:layout_marginLeft="16dp"
+            android:paddingTop="5dp"
+            android:textColor="#aaaaaa"
+            android:lines="1"
             android:text="title" />
 
     </RelativeLayout>

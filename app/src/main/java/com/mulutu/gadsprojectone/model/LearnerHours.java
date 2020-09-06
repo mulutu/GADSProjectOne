@@ -1,18 +1,18 @@
 package com.mulutu.gadsprojectone.model;
 
-public class Learner {
+public class LearnerHours implements Comparable< LearnerHours > {
     private String name;
     private Integer hours;
     private String country;
     private String badgeUrl;
     private Integer criteria; // 1 = IQ,  2 = Hours
 
-    public Learner(String name, Integer hours, String country, String badgeUrl, Integer criteria) {
+    public LearnerHours(String name, Integer hours, String country, String badgeUrl, Integer criteria) {
         this.name = name;
         this.hours = hours;
         this.country = country;
         this.badgeUrl = badgeUrl;
-        this.criteria =  criteria;
+        this.criteria = criteria;
     }
 
     public String getName() {
@@ -53,5 +53,10 @@ public class Learner {
 
     public void setCriteria(Integer criteria) {
         this.criteria = criteria;
+    }
+
+    @Override
+    public int compareTo(LearnerHours o) {
+        return this.getHours().compareTo(o.getHours());
     }
 }
