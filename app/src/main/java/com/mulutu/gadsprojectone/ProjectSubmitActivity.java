@@ -60,7 +60,7 @@ public class ProjectSubmitActivity extends AppCompatActivity {
 
     private void showCustomDialog() {
         ViewGroup viewGroup = findViewById(android.R.id.content);
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.my_dialog_you_sure, viewGroup, false);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.my_dialog_red_alert, viewGroup, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
         AlertDialog alertDialog = builder.create();

@@ -6,11 +6,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:background="@color/colorPrimary"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,29 +29,34 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:layout_marginBottom="30dp"
                 android:orientation="horizontal">
 
                 <EditText
                     android:id="@+id/firstName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/et_style"
-                    android:padding="10dp"
-                    android:layout_marginRight="10dp"
                     android:hint="First Name"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/lastName"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="Last Name"
+                    android:layout_toRightOf="@id/firstName"
                     android:layout_weight="1"
                     android:background="@drawable/et_style"
+                    android:hint="Last Name"
+                    android:inputType="textPersonName"
                     android:padding="10dp"
-                    android:layout_toRightOf="@id/firstName"
-                    android:inputType="textPersonName" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
 
@@ -56,16 +65,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="30dp">
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="Email Address"
                     android:background="@drawable/et_style"
+                    android:hint="Email Address"
+                    android:inputType="textPersonName"
                     android:padding="10dp"
-                    android:inputType="textPersonName" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <!-- Password Label -->
@@ -73,29 +84,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="40dp">
 
                 <EditText
                     android:id="@+id/githubLink"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:gravity="top"
                     android:background="@drawable/et_style"
-                    android:padding="10dp"
+                    android:gravity="top"
                     android:hint="Project on GITHUB(link)"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <!-- Signup Button -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSubmitFarm"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="24dp"
-                android:padding="12dp"
                 android:background="@drawable/my_submit_button"
-                android:text="Submit" />
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="Submit"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
