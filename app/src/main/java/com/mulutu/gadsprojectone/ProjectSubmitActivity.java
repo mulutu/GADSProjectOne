@@ -1,13 +1,14 @@
 package com.mulutu.gadsprojectone;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -52,16 +53,20 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         _btnSubmitFarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //submitFarm();
+                showCustomDialog();
             }
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+    private void showCustomDialog() {
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.my_dialog_you_sure, viewGroup, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -73,11 +78,4 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*@Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(ProjectSubmitActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }*/
 }
