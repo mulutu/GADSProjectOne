@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,12 +54,12 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         _btnSubmitFarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showCustomDialog();
+                showCustomDecisionDialog();
             }
         });
     }
 
-    private void showCustomDialog() {
+    private void showCustomAlertDialog() {
         ViewGroup viewGroup = findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.my_dialog_red_alert, viewGroup, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -67,10 +68,46 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    private void showCustomSuccessDialog() {
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.my_dialog_tick_green, viewGroup, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void showCustomDecisionDialog() {
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.my_dialog_you_sure, viewGroup, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+
+        TextView _no = (TextView) dialogView.findViewById(R.id.txtclose);
+        _no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        Button _yes = (Button) dialogView.findViewById(R.id.buttonOk);
+        _yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitProject();
+            }
+        });
+        alertDialog.show();
+    }
+
+    private void submitProject() {
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
