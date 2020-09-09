@@ -1,6 +1,7 @@
 package com.mulutu.gadsprojectone;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +14,19 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.mulutu.gadsprojectone.util.ApiUtils;
+import com.mulutu.gadsprojectone.util.GetDataService;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class ProjectSubmitActivity extends AppCompatActivity {
+
+    private final String TAG = getClass().getSimpleName();
 
     Toolbar toolbar;
 
@@ -23,6 +36,8 @@ public class ProjectSubmitActivity extends AppCompatActivity {
     private EditText _githubLink;
     private Button _btnSubmitFarm;
 
+    private GetDataService getDataService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +46,8 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         prepareToolbar();
+
+        getDataService = ApiUtils.GetDataService();
 
         prepareView();
     }
@@ -101,7 +118,39 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private void submitProject() {
+
+    public void submitProject() {
+        _firstName = (EditText) findViewById(R.id.firstName);
+        _lastName = (EditText) findViewById(R.id.lastName);
+        _email = (EditText) findViewById(R.id.email);
+        _githubLink = (EditText) findViewById(R.id.githubLink);
+
+        String firstName = _firstName.getText().toString();
+        String lastName = _lastName.getText().toString();
+        String email = _email.getText().toString();
+        String githubLink = _githubLink.getText().toString();
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("entry.1824927963", email);
+        params.put("entry.1877115667", firstName);
+        params.put("entry.2006916086", lastName);
+        params.put("entry.284483984", githubLink);
+
+        getDataService.savePost(params).enqueue(new Callback<PostResponse>() {
+            @Override
+            public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                if (response.isSuccessful()) {
+                    showCustomSuccessDialog();
+                    Log.i(TAG, "post submitted to API." + response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostResponse> call, Throwable t) {
+                showCustomAlertDialog();
+                Log.e(TAG, "Unable to submit post to API.");
+            }
+        });
     }
 
 
