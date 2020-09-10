@@ -12,6 +12,9 @@
     <string name="button">submitBtn</string>
 
     <string name="title_activity_project_submit">ProjectSubmitActivity</string>
+    <string name="title_activity_splash">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>
 
