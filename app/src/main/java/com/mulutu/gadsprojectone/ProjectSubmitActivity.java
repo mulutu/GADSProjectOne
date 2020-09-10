@@ -82,7 +82,7 @@ public class ProjectSubmitActivity extends AppCompatActivity {
 
     private void prepareView() {
         TextView txt = (TextView) findViewById(R.id.txtProjectSubmission);
-        txt.setPaintFlags(txt.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        //txt.setPaintFlags(txt.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         _firstName = (EditText) findViewById(R.id.firstName);
         _lastName = (EditText) findViewById(R.id.lastName);
