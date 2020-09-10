@@ -2,7 +2,6 @@ package com.mulutu.gadsprojectone;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mulutu.gadsprojectone.adaptar.CustomAdapterHours;
 import com.mulutu.gadsprojectone.model.LearnerHours;
+import com.mulutu.gadsprojectone.util.ApiUtilsGet;
 import com.mulutu.gadsprojectone.util.GetDataService;
-import com.mulutu.gadsprojectone.util.RetrofitClientInstance;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,12 +35,14 @@ public class FragmentLearningLeaders extends Fragment {
     private RecyclerView recyclerView;
     private List<LearnerHours> studentList = new ArrayList<>();
 
+    private GetDataService getDataService;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = (ViewGroup) inflater.inflate(R.layout.fragment, null);
 
-        Log.d(TAG, ">>>  start <<<");
+        getDataService = ApiUtilsGet.GetDataService();
 
         return root;
     }
@@ -54,9 +55,9 @@ public class FragmentLearningLeaders extends Fragment {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<List<LearnerHours>> call = service.getTopHoursLearners();
-        call.enqueue(new Callback<List<LearnerHours>>() {
+        //GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        //Call<List<LearnerHours>> call = service.getTopHoursLearners();
+        getDataService.getTopHoursLearners().enqueue(new Callback<List<LearnerHours>>() {
             @Override
             public void onResponse(Call<List<LearnerHours>> call, Response<List<LearnerHours>> response) {
                 progressDialog.dismiss();

@@ -17,7 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.mulutu.gadsprojectone.util.ApiUtils;
+import com.mulutu.gadsprojectone.util.ApiUtilsPost;
 import com.mulutu.gadsprojectone.util.GetDataService;
 
 import java.util.HashMap;
@@ -49,7 +49,7 @@ public class ProjectSubmitActivity extends AppCompatActivity {
 
         prepareToolbar();
 
-        getDataService = ApiUtils.GetDataService();
+        getDataService = ApiUtilsPost.GetDataService();
 
         prepareView();
     }

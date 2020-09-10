@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mulutu.gadsprojectone.adaptar.CustomAdapterIQ;
 import com.mulutu.gadsprojectone.model.LearnerIQ;
+import com.mulutu.gadsprojectone.util.ApiUtilsGet;
 import com.mulutu.gadsprojectone.util.GetDataService;
-import com.mulutu.gadsprojectone.util.RetrofitClientInstance;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,10 +33,15 @@ public class FragmentSkillIQLeaders extends Fragment {
     private RecyclerView recyclerView;
     private List<LearnerIQ> studentList = new ArrayList<>();
 
+    private GetDataService getDataService;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = (ViewGroup) inflater.inflate(R.layout.fragment, null);
+
+        getDataService = ApiUtilsGet.GetDataService();
+
         return root;
     }
 
@@ -48,9 +53,9 @@ public class FragmentSkillIQLeaders extends Fragment {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<List<LearnerIQ>> call = service.getTopSkillIQLearners();
-        call.enqueue(new Callback<List<LearnerIQ>>() {
+        //GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        //Call<List<LearnerIQ>> call = service.getTopSkillIQLearners();
+        getDataService.getTopSkillIQLearners().enqueue(new Callback<List<LearnerIQ>>() {
             @Override
             public void onResponse(Call<List<LearnerIQ>> call, Response<List<LearnerIQ>> response) {
                 progressDialog.dismiss();

@@ -1,7 +1,7 @@
 package com.mulutu.gadsprojectone.util;
 
-public class ApiUtils {
-    private ApiUtils() {}
+public class ApiUtilsPost {
+    private ApiUtilsPost() {}
 
     public static final String BASE_URL = "https://docs.google.com/forms/d/e/";
 
