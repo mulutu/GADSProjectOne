@@ -1,5 +1,8 @@
 package com.mulutu.gadsprojectone;
 
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,9 +44,8 @@ public class ProjectSubmitActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_submit);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        setFullScreenView();
 
         prepareToolbar();
 
@@ -53,6 +55,7 @@ public class ProjectSubmitActivity extends AppCompatActivity {
     }
 
     private void prepareToolbar() {
+        setContentView(R.layout.activity_project_submit);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -62,7 +65,25 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         }
     }
 
+    protected void setFullScreenView(){
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_IMMERSIVE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            );
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+        }
+    }
+
     private void prepareView() {
+        TextView txt = (TextView) findViewById(R.id.txtProjectSubmission);
+        txt.setPaintFlags(txt.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+
         _firstName = (EditText) findViewById(R.id.firstName);
         _lastName = (EditText) findViewById(R.id.lastName);
         _email = (EditText) findViewById(R.id.email);

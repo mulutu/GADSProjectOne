@@ -9,20 +9,35 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
+        android:background="@android:color/transparent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="24dp"
-            android:paddingTop="100dp"
+            android:paddingTop="50dp"
             android:paddingRight="24dp">
+
+            <EditText
+                android:id="@+id/txtProjectSubmission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:ems="10"
+                android:paddingBottom="10dp"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:gravity="center_horizontal"
+                android:inputType="textPersonName"
+                android:text="Project Submission"
+                android:textColor="#FF9800" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,7 +71,7 @@
                     android:inputType="textPersonName"
                     android:padding="10dp"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
 
@@ -76,7 +91,7 @@
                     android:inputType="textPersonName"
                     android:padding="10dp"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Password Label -->
@@ -96,7 +111,7 @@
                     android:inputType="textPersonName"
                     android:padding="10dp"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Signup Button -->
@@ -114,10 +129,11 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textColor="#FFFFFF"
                 android:textSize="25sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
