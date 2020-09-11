@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.mulutu.gadsprojectone.util.ApiUtilsPost;
 import com.mulutu.gadsprojectone.util.GetDataService;
+import com.mulutu.gadsprojectone.util.PostDataService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class ProjectSubmitActivity extends AppCompatActivity {
     private EditText _githubLink;
     private Button _btnSubmitFarm;
 
-    private GetDataService getDataService;
+    private GetDataService getPostDataService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class ProjectSubmitActivity extends AppCompatActivity {
 
         prepareToolbar();
 
-        getDataService = ApiUtilsPost.GetDataService();
+        getPostDataService = ApiUtilsPost.GetDataService();
 
         prepareView();
     }
@@ -116,6 +117,8 @@ public class ProjectSubmitActivity extends AppCompatActivity {
     }
 
     private void showCustomDecisionDialog() {
+        Log.e(TAG, "showCustomDecisionDialog ::: post to API.");
+
         ViewGroup viewGroup = findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.my_dialog_you_sure, viewGroup, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -151,25 +154,34 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         String email = _email.getText().toString();
         String githubLink = _githubLink.getText().toString();
 
+        Log.e(TAG, "submitProject ::: post to API.");
+
         Map<String, String> params = new HashMap<String, String>();
         params.put("entry.1824927963", email);
         params.put("entry.1877115667", firstName);
         params.put("entry.2006916086", lastName);
         params.put("entry.284483984", githubLink);
 
-        getDataService.savePost(params).enqueue(new Callback<PostResponse>() {
+        String url = "https://docs.google.com/forms/d/e/1FAIpQLSf9d1TcNU6zc6KR8bSEM41Z1g1zl35cwZr2xyjIhaMAz8WChQ/formResponse";
+
+        getPostDataService.savePost(url,params).enqueue(new Callback<PostResponse>() {
             @Override
             public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
-                if (response.isSuccessful()) {
+                /*if (response.isSuccessful()) {
                     showCustomSuccessDialog();
                     Log.i(TAG, "post submitted to API." + response.body().toString());
-                }
+                }else{
+                    Log.i(TAG, "submitProject failed to API." + response.body().toString());
+                }*/
+
+                showCustomSuccessDialog();
+                Log.i(TAG, "post submitted to API." + response.toString());
             }
 
             @Override
             public void onFailure(Call<PostResponse> call, Throwable t) {
                 showCustomAlertDialog();
-                Log.e(TAG, "Unable to submit post to API.");
+                Log.e(TAG, "Unable to submit post to API.::: " + call.toString());
             }
         });
     }
