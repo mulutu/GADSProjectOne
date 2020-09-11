@@ -1,7 +1,6 @@
 package com.mulutu.gadsprojectone;
 
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +18,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.mulutu.gadsprojectone.util.ApiUtilsPost;
 import com.mulutu.gadsprojectone.util.GetDataService;
-import com.mulutu.gadsprojectone.util.PostDataService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +37,6 @@ public class ProjectSubmitActivity extends AppCompatActivity {
     private EditText _email;
     private EditText _githubLink;
     private Button _btnSubmitFarm;
-
     private GetDataService getPostDataService;
 
     @Override
@@ -66,8 +63,8 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         }
     }
 
-    protected void setFullScreenView(){
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+    protected void setFullScreenView() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             View decorView = getWindow().getDecorView();
             decorView.setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_IMMERSIVE
@@ -162,26 +159,31 @@ public class ProjectSubmitActivity extends AppCompatActivity {
         params.put("entry.2006916086", lastName);
         params.put("entry.284483984", githubLink);
 
-        String url = "https://docs.google.com/forms/d/e/1FAIpQLSf9d1TcNU6zc6KR8bSEM41Z1g1zl35cwZr2xyjIhaMAz8WChQ/formResponse";
 
-        getPostDataService.savePost(url,params).enqueue(new Callback<PostResponse>() {
+        //String url = "https://docs.google.com/forms/d/e/1FAIpQLSf9d1TcNU6zc6KR8bSEM41Z1g1zl35cwZr2xyjIhaMAz8WChQ/formResponse";
+
+        getPostDataService.savePost(params).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
-                /*if (response.isSuccessful()) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.code() == 200) {
                     showCustomSuccessDialog();
-                    Log.i(TAG, "post submitted to API." + response.body().toString());
-                }else{
-                    Log.i(TAG, "submitProject failed to API." + response.body().toString());
-                }*/
+                    Log.i(TAG, "post submitted to API." + response.message());
+                } else {
+                    Log.i(TAG, "submitProject failed to API else >>> ." + response.message());
+                }
 
-                showCustomSuccessDialog();
-                Log.i(TAG, "post submitted to API." + response.toString());
+                //showCustomSuccessDialog();
+                Log.i(TAG, "post submitted to API. raw" + response.code());
+                //Log.i(TAG, "post submitted to API. errorbody" + response.errorBody());
             }
 
             @Override
-            public void onFailure(Call<PostResponse> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
                 showCustomAlertDialog();
+
                 Log.e(TAG, "Unable to submit post to API.::: " + call.toString());
+
             }
         });
     }
